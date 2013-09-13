@@ -18,3 +18,5 @@ test-output
 .DS_Store
 .externalToolBuilders
 *~
+.settings
+bin

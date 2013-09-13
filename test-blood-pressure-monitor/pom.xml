@@ -1,128 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
 
-    <groupId>co.uk.planetjones</groupId>
-    <artifactId>test-blood-pressure-monitor</artifactId>
+	<groupId>co.uk.planetjones</groupId>
+	<artifactId>test-blood-pressure-monitor</artifactId>
 
-    <properties>
-        <appengine.app.version>1</appengine.app.version>
-        <appengine.target.version>1.8.0</appengine.target.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<properties>
+		<appengine.app.version>1</appengine.app.version>
+		<gae.version>1.8.4</gae.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<gae.home>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
+	</properties>
 
-    <dependencies>
-        <!-- Compile/runtime dependencies -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${appengine.target.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
+	<dependencies>
+		<!-- Compile/runtime dependencies -->
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>${gae.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
-        <!-- Test Dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-testing</artifactId>
-            <version>${appengine.target.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-stubs</artifactId>
-            <version>${appengine.target.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-endpoints</artifactId>
-            <version>${appengine.target.version}</version>
-        </dependency>
+		<!-- Test Dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.0</version>
+			<scope>test</scope>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.google.appengine</groupId> -->
+<!-- 			<artifactId>appengine-testing</artifactId> -->
+<!-- 			<version>${gae.version}</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<version>${gae.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-endpoints</artifactId>
+			<version>${gae.version}</version>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <version>2.5.1</version>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>2.5.1</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
 
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <webXml>${project.build.directory}/generated-sources/appengine-endpoints/WEB-INF/web.xml</webXml>
-                    <webResources>
-                        <resource>
-                        <directory>${basedir}/src/main/webapp/WEB-INF/</directory>
-                            <filtering>true</filtering>
-                            <targetPath>WEB-INF</targetPath>
-                            <excludes>
-                                <exclude>web.xml</exclude>
-                            </excludes>
-                        </resource>
-                        <resource>
-                            <directory>${project.build.directory}/generated-sources/appengine-endpoints</directory>
-                            <includes>
-                                <include>WEB-INF/*.discovery</include>
-                                <include>WEB-INF/*.api</include>
-                            </includes>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webXml>${project.build.directory}/generated-sources/appengine-endpoints/WEB-INF/web.xml</webXml>
+					<webResources>
+						<resource>
+							<directory>${basedir}/src/main/webapp/WEB-INF/</directory>
+							<filtering>true</filtering>
+							<targetPath>WEB-INF</targetPath>
+							<excludes>
+								<exclude>web.xml</exclude>
+							</excludes>
+						</resource>
+						<resource>
+							<directory>${project.build.directory}/generated-sources/appengine-endpoints</directory>
+							<includes>
+								<include>WEB-INF/*.discovery</include>
+								<include>WEB-INF/*.api</include>
+							</includes>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
 
-            <plugin>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-maven-plugin</artifactId>
-                <version>${appengine.target.version}</version>
-                <configuration>
-                    <enableJarClasses>false</enableJarClasses>
-                        <oauth2>false</oauth2>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>endpoints_get_discovery_doc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+			<plugin>
+				<groupId>net.kindleit</groupId>
+				<artifactId>maven-gae-plugin</artifactId>
+				<version>0.9.5</version>
+				<configuration>
+					<unpackVersion>${gae.version}</unpackVersion>
+					<appDir>${webappDirectory}</appDir>
+					<sdkDir>${gae.home}</sdkDir>
+
+					<!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
+					<serverId>appengine-credentials</serverId>
+					<splitJars>true</splitJars>
+				</configuration>
+				<dependencies>
+					<!-- Google App Engine API -->
+					<dependency>
+						<groupId>com.google.appengine</groupId>
+						<artifactId>appengine-api-1.0-sdk</artifactId>
+						<version>${gae.version}</version>
+					</dependency>
+					<!-- Google App Engine Runtime Dependencies -->
+					<dependency>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-jta_1.1_spec</artifactId>
+						<version>1.1.1</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-jpa_3.0_spec</artifactId>
+						<version>1.1.1</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>javax.jdo</groupId>
+						<artifactId>jdo2-api</artifactId>
+						<version>2.3-eb</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-core</artifactId>
+						<version>1.1.5</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.appengine.orm</groupId>
+						<artifactId>datanucleus-appengine</artifactId>
+						<version>1.0.10</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-jpa</artifactId>
+						<version>1.1.5</version>
+						<scope>runtime</scope>
+					</dependency>
+					<!-- App Engine Runtime Dependencies -->
+					<dependency>
+						<groupId>com.google.appengine</groupId>
+						<artifactId>appengine-tools-sdk</artifactId>
+						<version>${gae.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
